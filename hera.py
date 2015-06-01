@@ -51,9 +51,9 @@ class AntennaArray(a.pol.AntennaArray):
 #===========================ARRAY SPECIFIC PARAMETERS==========================
 
 #Set antenna positions here; for regular arrays like Hera we can use an algorithm; otherwise antpos should just be a list of [x,y,z] coords in light-nanoseconds
-nside = 7. #hex number
-L = 1400 / a.const.len_ns 
-dL = 1212 / a.const.len_ns #close packed hex
+nside = 3. #hex number
+L = 1460 / a.const.len_ns 
+dL = 1264 / a.const.len_ns #close packed hex
 antpos = []
 cen_y, cen_z = 0, 0
 for row in n.arange(nside):
@@ -66,7 +66,7 @@ for row in n.arange(nside):
 #Set other array parameters here
 prms = {
     'name': os.path.basename(__file__)[:-3], #remove .py from filename
-    'loc': ('38:25:59.24',  '-79:51:02.1'), # Green Bank, WV
+    'loc': ('-30:43:17.2','21:25:41.7'), # Karoo  #'loc': ('38:25:59.24',  '-79:51:02.1'), # Green Bank, WV
     'antpos': antpos,
     'beam': a.fit.Beam2DGaussian,
     'dish_size_in_lambda': 7., #in units of wavelengths at 150 MHz = 2 meters; this will also define the observation duration
