@@ -51,7 +51,7 @@ class AntennaArray(a.pol.AntennaArray):
 #===========================ARRAY SPECIFIC PARAMETERS==========================
 
 #Set antenna positions here; for regular arrays like Hera we can use an algorithm; otherwise antpos should just be a list of [x,y,z] coords in light-nanoseconds
-nside = 3. #hex number
+nside = 11. #hex number
 L = 1460 / a.const.len_ns 
 dL = 1264 / a.const.len_ns #close packed hex
 antpos = []
