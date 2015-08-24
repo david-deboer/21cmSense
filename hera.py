@@ -1,4 +1,5 @@
 import aipy as a, numpy as n, os
+import math
 
 class AntennaArray(a.pol.AntennaArray):
     def __init__(self, *args, **kwargs):
@@ -51,9 +52,19 @@ class AntennaArray(a.pol.AntennaArray):
 #===========================ARRAY SPECIFIC PARAMETERS==========================
 
 #Set antenna positions here; for regular arrays like Hera we can use an algorithm; otherwise antpos should just be a list of [x,y,z] coords in light-nanoseconds
-nside = 11. #hex number
-L = 1460 / a.const.len_ns 
-dL = 1264 / a.const.len_ns #close packed hex
+##############################
+##############################
+SScale = 1.0
+Dant = 1400.0*SScale  # cm
+Spacing = 60.0*SScale # cm
+nside = 11.           # hex number
+freq = 150.0          # MHz
+##############################
+##############################
+
+L = (Dant+Spacing) / a.const.len_ns 
+dL = (Dant+Spacing)*math.cos(30.0*math.pi/180.0) / a.const.len_ns #close packed hex
+ant_size_wavel = Dant / (300./freq)
 antpos = []
 cen_y, cen_z = 0, 0
 for row in n.arange(nside):
@@ -69,7 +80,7 @@ prms = {
     'loc': ('-30:43:17.2','21:25:41.7'), # Karoo  #'loc': ('38:25:59.24',  '-79:51:02.1'), # Green Bank, WV
     'antpos': antpos,
     'beam': a.fit.Beam2DGaussian,
-    'dish_size_in_lambda': 7., #in units of wavelengths at 150 MHz = 2 meters; this will also define the observation duration
+    'dish_size_in_lambda': ant_size_wavel, #in units of wavelengths at 150 MHz = 2 meters; this will also define the observation duration
     'Trx': 1e5 #receiver temp in mK
 }
 
