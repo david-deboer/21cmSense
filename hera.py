@@ -64,7 +64,7 @@ freq = 150.0          # MHz
 
 L = (Dant+Spacing) / a.const.len_ns 
 dL = (Dant+Spacing)*math.cos(30.0*math.pi/180.0) / a.const.len_ns #close packed hex
-ant_size_wavel = Dant / (300./freq)
+ant_size_wavel = (Dant/100.0) / (300./freq)
 antpos = []
 cen_y, cen_z = 0, 0
 for row in n.arange(nside):
